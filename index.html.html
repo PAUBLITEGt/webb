@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAUDRONIX GT | Ofertas Navideñas</title>
+    <style>
+        /* --- FUENTES --- */
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;800&display=swap');
+
+        /* --- VARIABLES (Paleta NEÓN VIBRANTE) --- */
+        :root {
+            --bg-color: #0d001a;      /* Púrpura/Azul muy oscuro */
+            --bg-gradient: linear-gradient(135deg, #300060 0%, #a800d8 100%); /* Púrpura a Magenta Vibrante */
+            --primary: #ff33cc;       /* Rosa Neón */
+            --accent: #00ffcc;        /* Cian Neón Brillante */
+            --glass: rgba(255, 255, 255, 0.15); /* Más translúcido */
+            --glass-border: rgba(0, 255, 204, 0.4); /* Borde Cian Neón */
+            --text-main: #ffffff;
+            --nav-bg: #1f003a; /* Más oscuro y vibrante */
+            --gold-shine: #fff4af; 
+            /* COLORES NUEVOS DE LA IMAGEN DE REFERENCIA */
+            --ref-red: #ff3366; /* Rosa Fuerte para números y descuentos */
+            --ref-green: #39ff14; /* Verde Eléctrico Neón para botones de compra */
+            /* --- GIF DEL HEADER SOLICITADO --- */
+            --header-bg-image: url('https://i.pinimg.com/originals/d1/13/56/d11356e3072852782bf5838dee1ea1bf.gif');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- NIEVE ANIMADA (SUAVE) --- */
+        .snow-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            background-image: 
+                radial-gradient(3px 3px at 20px 30px, #fff, rgba(0,0,0,0)),
+                radial-gradient(4px 4px at 40px 70px, #fff, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 60px 100px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 80px 130px, #fff, rgba(0,0,0,0)),
+                radial-gradient(4px 4px at 100px 160px, #fff, rgba(0,0,0,0));
+            background-size: 250px 250px;
+            animation: fall 10s linear infinite; 
+            opacity: 0.7; 
+        }
+        @keyframes fall {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(250px); }
+        }
+
+        /* --- ESTILOS GENERALES --- */
+        .glass {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            /* Sombra neón suave para el glass */
+            box-shadow: 0 4px 30px rgba(0, 255, 204, 0.15); 
+        }
+
+        .btn-buy {
+            display: inline-block;
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            background: var(--ref-green); /* Verde Neón */
+            color: var(--bg-color); /* Texto oscuro para contraste */
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 0 15px var(--ref-green); /* Sombra neón verde */
+        }
+        .btn-buy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px var(--ref-green), 0 0 40px var(--ref-green);
+        }
+
+        .btn-delete {
+            background: rgba(255, 51, 102, 0.3); color: #fff; /* Rosa Neón */
+            border: 1px solid var(--ref-red); width: 100%; padding: 5px;
+            margin-top: 5px; border-radius: 5px; cursor: pointer; font-size: 0.8rem;
+            display: none; 
+        }
+        .btn-delete:hover { background: var(--ref-red); }
+        
+        .management-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .management-table th, .management-table td {
+            border: 1px solid var(--glass-border);
+            padding: 10px;
+            text-align: left;
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+        .management-table th {
+            background: rgba(255, 51, 102, 0.2); /* Fondo de tabla Rosa/Neón */
+            color: var(--accent);
+        }
+        #modal-product-management .modal-content {
+            max-width: 850px;
+        }
+        /* --- NAV --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--nav-bg); 
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .brand {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .brand span { color: var(--accent); }
+        
+        /* Eliminamos el estilo de la imagen de marca */
+
+        /* --- HERO (HEADER) CON FONDO) --- */
+        header {
+            text-align: center;
+            padding: 100px 20px 20px; 
+            position: relative;
+            z-index: 2;
+            background: 
+                /* Nuevo gradiente de superposición más oscuro y neón */
+                linear-gradient(rgba(13, 0, 26, 0.8), rgba(168, 0, 216, 0.6)), 
+                var(--header-bg-image);
+            background-size: cover; 
+            background-position: center center; 
+            border-bottom: 1px solid var(--glass-border);
+            /* Mantenemos esta corrección para el parpadeo del GIF */
+            backface-visibility: hidden; 
+            transform: translate3d(0, 0, 0);
+            image-rendering: -webkit-optimize-contrast; 
+        }
+        
+        header h1 {
+            display: block; 
+            font-size: 3.5rem;
+            margin-bottom: 5px; 
+            line-height: 1.2;
+            color: #fff;
+            /* Sombra de texto neón */
+            text-shadow: 0 0 10px var(--primary), 0 0 20px rgba(255, 51, 204, 0.8);
+            letter-spacing: 2px;
+            font-weight: 800;
+            animation: pulse-title 5s infinite;
+        }
+        header .highlight { 
+            color: var(--accent); 
+            /* Sombra neón para el highlight */
+            text-shadow: 0 0 10px var(--accent), 0 0 20px rgba(0, 255, 204, 0.8);
+        }
+        
+        header p { 
+            display: block; 
+            color: #fff; 
+            font-size: 1.2rem; 
+            margin-bottom: 30px; 
+            text-shadow: 1px 1px 4px black; 
+            font-weight: 500;
+        }
+        
+        @keyframes pulse-title {
+            0%, 100% { text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent), 0 0 30px rgba(255, 255, 255, 0.7); }
+            50% { text-shadow: 0 0 15px var(--accent), 0 0 25px var(--accent), 0 0 40px rgba(255, 255, 255, 1); }
+        }
+
+        /* --- NUEVOS ESTILOS PARA TABS Y NÚMEROS (INSPIRACIÓN DE LA IMAGEN) --- */
+        .hero-info-wrapper {
+            position: relative;
+            z-index: 5;
+            background: #fff; /* Se deja blanco para un alto contraste */
+            padding-bottom: 30px;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 20px 5%;
+            gap: 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        .tab-btn {
+            background: var(--nav-bg); 
+            color: var(--text-main);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid transparent;
+            text-decoration: none;
+            /* Sombra Neón */
+            box-shadow: 0 0 8px rgba(0, 255, 204, 0.3);
+        }
+        .tab-btn:hover {
+            background: #2a0050;
+        }
+        .tab-btn.active {
+            background: var(--accent); /* Cian Neón Activo */
+            color: var(--bg-color); /* Texto oscuro en el neón */
+            font-weight: 800;
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            padding: 30px 5%;
+            background: #fff; 
+            color: var(--bg-color); 
+        }
+        .stat-item {
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+        .stat-item span {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--ref-red); /* Rosa Neón para números */
+            text-shadow: 0 0 5px rgba(255, 51, 102, 0.5);
+            margin-bottom: 5px;
+        }
+        .stats-bar p { color: var(--bg-color); font-weight: 500;} 
+        /* --- FIN NUEVOS ESTILOS --- */
+
+        /* --- SECCIONES --- */
+        .category-section {
+            padding: 50px 8%;
+            position: relative;
+            z-index: 2;
+        }
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        .category-header h2 { font-size: 2rem; color: #fff; }
+        .line { flex: 1; height: 1px; background: var(--glass-border); }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            padding: 30px;
+            text-align: center;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: #fff; 
+            color: #000; 
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .card:hover {
+            transform: translateY(-5px); 
+            border-color: var(--ref-red);
+            background: #fff;
+            box-shadow: 0 0 20px var(--primary); /* Sombra neón al pasar el mouse */
+        }
+        /* Nueva etiqueta de descuento */
+        .discount-badge {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: var(--ref-red); /* Rosa Neón */
+            color: white;
+            padding: 5px 15px;
+            font-size: 0.9rem;
+            font-weight: 800;
+            border-radius: 16px 0 16px 0;
+            z-index: 10;
+        }
+        
+        .app-logo {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 8px rgba(0,0,0,0.3)); 
+            margin-left: auto; margin-right: auto;
+        }
+        .card .app-logo {
+            filter: none; 
+        }
+        .card p {
+            color: #555 !important;
+        }
+        .card h3 {
+            color: #000;
+            margin-bottom: 5px;
+        }
+
+        .product-img-custom {
+            width: 100%;
+            height: 180px; 
+            object-fit: cover; 
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background: rgba(0,0,0,0.2);
+        }
+        .card .product-img-custom {
+            filter: none;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--ref-red); 
+            text-shadow: 0 0 5px rgba(255, 51, 102, 0.5); /* Sombra neón rojo */
+            margin: 10px 0;
+        }
+
+        /* --- MODALES (cambio de fondo y color principal) --- */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: #1a0033; /* Púrpura oscuro */
+            border: 1px solid var(--accent);
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            color: white;
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 0 30px rgba(0, 255, 204, 0.3); /* Sombra cian */
+        }
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: var(--accent);
+        }
+        .modal-content h2 { margin-bottom: 20px; color: var(--accent); }
+        .modal-content p, .modal-content li { line-height: 1.6; color: #ccc; margin-bottom: 10px; }
+
+        .form-group { margin-bottom: 15px; text-align: left; }
+        .form-group label { display: block; margin-bottom: 5px; color: var(--accent); }
+        .form-group input, .form-group select {
+            width: 100%; padding: 10px; background: rgba(255,255,255,0.1);
+            border: 1px solid var(--glass-border); color: white; border-radius: 5px;
+        }
+        .btn-add {
+            background: var(--ref-green); /* Verde Neón */
+            color: var(--bg-color); 
+            width: 100%;
+            padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;
+            box-shadow: 0 0 10px var(--ref-green);
+        }
+        
+        .admin-instructions {
+            background: rgba(255, 51, 102, 0.1); 
+            border-left: 3px solid var(--primary); /* Rosa neón */
+            padding: 15px; 
+            margin-bottom: 25px; 
+            font-size: 0.95rem;
+            border-radius: 5px;
+        }
+        .admin-instructions h4 { 
+            color: var(--primary); 
+            margin-bottom: 10px; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 800;
+        }
+        .admin-instructions li { margin-bottom: 8px; }
+        
+        .admin-btn-group {
+            display: flex;
+            flex-direction: column; 
+            gap: 15px;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .admin-btn {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: 0.3s;
+            text-align: center;
+        }
+        .btn-green { 
+            background: var(--ref-green); color: var(--bg-color); /* Verde Neón */
+            box-shadow: 0 0 10px var(--ref-green);
+        }
+        .btn-green:hover { background: #1fbf58; }
+        .btn-yellow { 
+            background: var(--primary); color: var(--bg-color); /* Rosa Neón */
+            border: 2px solid #fff; 
+            font-size: 1.1rem; 
+            box-shadow: 0 0 20px rgba(255, 51, 204, 0.5); 
+        }
+        .btn-yellow:hover { opacity: 0.9; }
+        
+        .access-block {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .access-block h3 { color: var(--accent); margin-bottom: 15px; font-size: 1.3rem;}
+        
+        #file-name-display {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.8rem;
+            color: var(--ref-green);
+        }
+
+        #modal-condiciones h2 {
+            color: var(--primary);
+            font-weight: 800;
+        }
+        #modal-condiciones p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: #fff;
+        }
+        #modal-condiciones ul {
+            list-style: none;
+            padding-left: 0;
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            padding: 20px;
+        }
+        #modal-condiciones ul li {
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            color: #ddd;
+        }
+        #modal-condiciones ul li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .management-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .management-table th, .management-table td {
+            border: 1px solid var(--glass-border);
+            padding: 10px;
+            text-align: left;
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+        .management-table th {
+            background: rgba(255, 51, 204, 0.2); /* Fondo de tabla Rosa/Neón */
+            color: var(--accent);
+        }
+        #modal-product-management .modal-content {
+            max-width: 850px;
+        }
+        
+        /* --- FOOTER --- */
+        footer {
+            background: #050010; /* Fondo más oscuro */
+            padding: 60px 8% 30px;
+            border-top: 1px solid var(--glass-border);
+            position: relative;
+            z-index: 2;
+            margin-top: 50px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+        .footer-col h4 { color: var(--accent); margin-bottom: 20px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { 
+            color: #aaa; text-decoration: none; transition: 0.3s; cursor: pointer;
+        }
+        .footer-col ul li a:hover { color: var(--accent); text-shadow: 0 0 5px var(--accent); }
+
+        /* --- BOTONES FLOTANTES --- */
+        .wa-float {
+            position: fixed;
+            bottom: 30px; right: 30px;
+            width: 60px; height: 60px;
+            background: var(--ref-green);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 15px var(--ref-green);
+            z-index: 999;
+            transition: 0.3s;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        .nav-admin-btn {
+            background: var(--primary);
+            color: var(--bg-color);
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none !important;
+            transition: 0.3s;
+        }
+        .nav-admin-btn:hover {
+            opacity: 0.9;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .card { padding: 15px; }
+            .price { font-size: 1.4rem; }
+            .btn-buy { font-size: 0.8rem; padding: 8px; }
+            .christmas-gift-img { display: none; } 
+            .stats-bar { padding: 20px 5%; }
+            .stat-item { font-size: 1.1rem; }
+            .stat-item span { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="snow-container"></div>
+
+    <nav>
+        <div class="brand">👑 PAUDRONIX <span>GT</span></div>
+        <div style="display: flex; gap: 15px; align-items: center;">
+            <a href="#streaming" style="color:white; text-decoration: none;">Streaming</a>
+            <a href="#musica" style="color:white; text-decoration: none;">Música</a>
+            <a href="#software" style="color:white; text-decoration: none;">Software</a>
+            <a href="#" class="nav-admin-btn" onclick="openModal('modal-access-menu')">Vende con nosotros</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1>OFERTAS <br> <span class="highlight">ARCOÍRIS</span> DIGITALES</h1>
+        <p>Tus plataformas favoritas al mejor precio de Guatemala. <br>Entregas inmediatas vía WhatsApp.</p>
+        
+        <a href="#streaming" class="btn-buy" style="width: auto; padding: 15px 40px; background: var(--accent); color: #000; box-shadow: 0 4px 15px rgba(0, 255, 204, 0.4);">Ver Catálogo</a>
+    </header>
+
+    <div class="hero-info-wrapper">
+        <div class="filter-tabs">
+            <a href="#streaming" class="tab-btn active">Todos</a>
+            <a href="#streaming" class="tab-btn">Netflix</a>
+            <a href="#musica" class="tab-btn">Spotify</a>
+            <a href="#streaming" class="tab-btn">Disney+</a>
+            <a href="#streaming" class="tab-btn">Prime</a>
+            <a href="#musica" class="tab-btn">Gaming</a>
+            <a href="#software" class="tab-btn">Software GT</a>
+            </div>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <span>+300</span>
+                <p>CLIENTES FELICES</p>
+            </div>
+            <div class="stat-item">
+                <span>+850</span>
+                <p>CUENTAS ENTREGADAS</p>
+            </div>
+            <div class="stat-item">
+                <span>100%</span>
+                <p>SEGURO</p>
+            </div>
+        </div>
+        <h2 style="text-align: center; color: var(--bg-color); font-weight: 800; font-size: 2rem; margin-top: 30px;">
+            Plataformas Disponibles
+        </h2>
+    </div>
+    <section class="category-section" id="streaming" style="padding-top: 20px;">
+        <div class="category-header" style="display: none;">
+            <h2>🍿 Cine & TV</h2>
+            <div class="line"></div>
+        </div>
+        
+        <div class="grid" id="grid-streaming">
+            <div class="card glass">
+                <div class="discount-badge">-50%</div> <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Netflix_icon.svg" class="app-logo" alt="Netflix">
+                <h3>Netflix Premium</h3> <p style="color:#555; font-size:0.9rem">1 Perfil Privado</p>
+                <div class="price">Q.15.00</div> <a href="https://wa.me/50237871216?text=Hola%20Paudronix%2C%20quiero%20comprar%20Netflix" class="btn-buy" target="_blank" style="background: var(--ref-green);">PEDIR</a>
+            </div>
+
+            <div class="card glass">
+                <div class="discount-badge">-50%</div> <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" class="app-logo" style="filter: brightness(1);" alt="Disney">
+                <h3>Disney+ Standard</h3> <p style="color:#555; font-size:0.9rem">Calidad 4K</p>
+                <div class="price">Q.15.00</div> <a href="https://wa.me/50237871216?text=Hola%20Paudronix%2C%20quiero%20comprar%20Disney" class="btn-buy" target="_blank" style="background: var(--ref-green);">PEDIR</a>
+            </div>
+
+             <div class="card glass">
+                <div class="discount-badge">-50%</div> <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Max_logo.svg" class="app-logo" style="filter: invert(0);" alt="HBO">
+                <h3>HBO Max</h3> <p style="color:#555; font-size:0.9rem">3 Pantallas</p>
+                <div class="price">Q.15.00</div> <a href="https://wa.me/50237871216?text=Hola%20Paudronix%2C%20quiero%20comprar%20HBO" class="btn-buy" target="_blank" style="background: var(--ref-green);">PEDIR</a>
+            </div>
+
+             <div class="card glass">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Amazon_Prime_Video_logo.svg" class="app-logo" style="background:white; padding:5px; border-radius:5px;" alt="Prime">
+                <h3>Prime Video</h3>
+                <p style="color:#555; font-size:0.9rem">Envíos + TV</p>
+                <div class="price">Q.15.00</div>
+                <a href="https://wa.me/50237871216?text=Hola%20Paudronix%2C%20quiero%20comprar%20Prime" class="btn-buy" target="_blank" style="background: var(--ref-green);">PEDIR</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="category-section" id="musica">
+        <div class="category-header">
+            <h2>🎧 Música & Gaming</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="grid" id="grid-musica">
+            <div class="card glass">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" class="app-logo" alt="Spotify">
+                <h3>Spotify Premium</h3>
+                <p style="color:#555; font-size:0.9rem">Individual 1 Mes</p>
+                <div class="price">Q.20.00</div>
+                <a href="https://wa.me/50237871216?text=Hola%20Paudronix%2C%20quiero%20comprar%20Spotify" class="btn-buy" target="_blank" style="background: var(--ref-green);">PEDIR</a>
+            </div>
+
+            <div class="card glass">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" class="app-logo" alt="YT">
+                <h3>YouTube Premium</h3>
+                <p style="color:#555; font-size:0.9rem">Sin Anuncios</p>
+                <div class="price">Q.18.00</div>
+                <a href="https://wa.me/50237871216?text=Hola%20Paudronix%2C%20quiero%20comprar%20YouTube" class="btn-buy" target="_blank" style="background: var(--ref-green);">PEDIR</a>
+            </div>
+
+            <div class="card glass">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Xbox_Game_Pass_logo.svg" class="app-logo" alt="Xbox">
+                <h3>Game Pass Ult.</h3>
+                <p style="color:#555; font-size:0.9rem">PC + Consola</p>
+                <div class="price">Q.50.00</div>
+                <a href="https://wa.me/50237871216?text=Hola%20Paudronix%2C%20quiero%20comprar%20GamePass" class="btn-buy" target="_blank" style="background: var(--ref-green);">PEDIR</a>
+            </div>
+            <div class="card glass">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Steam_logo.svg" class="app-logo" style="filter: invert(0);" alt="Steam">
+                <h3>Tarj. Steam</h3>
+                <p style="color:#555; font-size:0.9rem">Q.100.00 (Guatemala)</p>
+                <div class="price">Q.100.00</div>
+                <a href="https://wa.me/50237871216?text=Hola%20Paudronix%2C%20quiero%20comprar%20Tarjeta%20Steam" class="btn-buy" target="_blank" style="background: var(--ref-green);">PEDIR</a>
+            </div>
+            </div>
+    </section>
+
+    <section class="category-section" id="software">
+        <div class="category-header">
+            <h2>💻 Software & Antivirus</h2>
+            <div class="line"></div>
+        </div>
+        <div class="grid" id="grid-software">
+            <div class="card glass">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Microsoft_Office_logo_%282019%2C_stacked%29.svg/1024px-Microsoft_Office_logo_%282019%2C_stacked%29.svg.png" class="app-logo" alt="Office">
+                <h3>Office 365</h3>
+                <p style="color:#555; font-size:0.9rem">1PC / 1 Año</p>
+                <div class="price">Q.75.00</div>
+                <a href="https://wa.me/50237871216?text=Hola%20Paudronix%2C%20quiero%20comprar%20Office%20365" class="btn-buy" target="_blank" style="background: var(--ref-green);">PEDIR</a>
+            </div>
+            <div class="card glass">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Windows_logo_-_2012.svg" class="app-logo" alt="Windows">
+                <h3>Windows 11 Pro</h3>
+                <p style="color:#555; font-size:0.9rem">Licencia Retail</p>
+                <div class="price">Q.125.00</div>
+                <a href="https://wa.me/50237871216?text=Hola%20Paudronix%2C%20quiero%20comprar%20Windows%2011" class="btn-buy" target="_blank" style="background: var(--ref-green);">PEDIR</a>
+            </div>
+            </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>PAUDRONIX GT</h4>
+                <p style="color:#888; font-size: 0.9rem;">El mejor entretenimiento digital de Guatemala. <br> Seguridad y confianza.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Legal & Ayuda</h4>
+                <ul>
+                    <li><a onclick="openModal('modal-privacy')">Política de Privacidad</a></li>
+                    <li><a onclick="openModal('modal-garantia')">Garantía de Servicio</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <ul>
+                    <li><a href="https://wa.me/50237871216">WhatsApp Soporte</a></li>
+                    <li><a href="#">Canal de Telegram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px; font-size: 0.8rem; color: #555;">
+            © 2023 PAUDRONIX GT - Guatemala
+        </div>
+    </footer>
+
+    <div id="modal-condiciones" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-condiciones')">&times;</span>
+            <h2 style="text-align:center;">📜 Condiciones y Política de Venta</h2>
+            
+            <p>
+                Bienvenido al sistema de ventas de PAUDRONIX GT. A continuación, se detallan las políticas que rigen la gestión de nuestro catálogo digital. Es vital seguir estos puntos para mantener la seguridad y la satisfacción del cliente.
+            </p>
+            <ul>
+                <li>**Responsabilidad del Vendedor:** Cada producto añadido debe ser funcional y estar acompañado de una descripción precisa. La garantía es responsabilidad del vendedor durante el periodo indicado.</li>
+                <li>**Contacto y Entregas:** La plataforma facilita el contacto directo entre el comprador y el vendedor (vía WhatsApp). La entrega de las credenciales es inmediata tras la confirmación del pago.</li>
+                <li>**Precio y Moneda:** Todos los precios deben ser establecidos en Quetzales (Q) de Guatemala.</li>
+                <li>**Gestión de Claves:** La clave de Venta (`paudronixGt@#1)`) debe cambiarse periódicamente usando la clave PRO (`paudrinixProGt2200@%`).</li>
+                <li>**Imágenes de Producto:** Se recomienda usar imágenes cuadradas o rectangulares de buena calidad para el catálogo.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="modal-access-menu" class="modal">
+        <div class="modal-content" style="max-width: 450px;">
+            <span class="close-btn" onclick="closeModal('modal-access-menu')">&times;</span>
+            <h2 style="text-align:center;">🤝 ¿Quieres Vender con Nosotros?</h2>
+            
+            <p style="text-align: center; color: #aaa; margin-bottom: 30px;">
+                ¡Únete a nuestro equipo y comienza a publicar tus productos digitales!
+            </p>
+            
+            <div class="admin-instructions" style="background: rgba(37, 211, 102, 0.1); border-left: 3px solid var(--ref-green);">
+                <h4><span style="font-size: 1.5rem;">📣</span> Instrucciones para Vendedores Públicos</h4>
+                <ol style="padding-left: 20px;">
+                    <li>**Contáctanos:** Envía un mensaje a nuestro WhatsApp principal (<a href="https://wa.me/50237871216" target="_blank" style="color: var(--ref-green); font-weight: bold;">502 3787 1216</a>) indicando que quieres unirte como vendedor.</li>
+                    <li>**Verificación:** Te proporcionaremos la **Contraseña de Venta** única para que puedas acceder al panel de publicación.</li>
+                    <li>**Publica:** Usa la clave para acceder y añadir tus productos. ¡Tu stock aparecerá inmediatamente!</li>
+                    <li>**Seguridad:** La clave de **Configuración PRO** es solo para el administrador maestro. Si eres un vendedor regular, usa la clave de Venta.</li>
+                </ol>
+            </div>
+            
+            <p style="text-align: center; color: #aaa; margin-top: 30px;">
+                *Si ya tienes tu clave de vendedor, ingresa a continuación.*
+            </p>
+
+            <div class="access-block" style="border: 1px solid var(--accent);">
+                <h3>💰 Acceso Venta (Agregar Productos)</h3>
+                <div class="form-group">
+                    <label>Contraseña de Venta</label>
+                    <input type="password" id="venta-pass-input" placeholder="Ingresa clave de Venta">
+                </div>
+                <button class="admin-btn btn-green" onclick="checkAdminAccess('VENDER')">
+                    Entrar a Panel de Publicación
+                </button>
+            </div>
+
+            <div class="access-block" style="background: rgba(255, 51, 204, 0.05); border: 1px solid var(--primary);">
+                <h3>⚙️ Acceso PRO (Eliminar / Stock)</h3>
+                <div class="form-group">
+                    <label>Contraseña PRO</label>
+                    <input type="password" id="pro-pass-input" placeholder="Ingresa clave PRO (Maestra)">
+                </div>
+                <button class="admin-btn btn-yellow" onclick="checkAdminAccess('CONFIG')">
+                    Entrar a Configuración PRO
+                </button>
+            </div>
+            
+            <p id="access-error-message" style="color: var(--primary); text-align: center; margin-top: 15px; display: none;">
+                ❌ Contraseña incorrecta. Inténtalo de nuevo.
+            </p>
+        </div>
+    </div>
+    
+    <div id="modal-admin-menu" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-admin-menu')">&times;</span>
+            <h2 style="text-align:center;">Gestión de Catálogo Digital</h2>
+            
+            <p style="color: #ccc; text-align: center;">
+                Utiliza las siguientes opciones para administrar tus productos.
+            </p>
+
+            <div class="admin-btn-group">
+                <button class="admin-btn btn-green" onclick="closeModal('modal-admin-menu'); openModal('modal-add-product')">
+                    ➕ Agregar Productos
+                </button>
+                <button class="admin-btn btn-yellow" style="opacity: 0.5; cursor: not-allowed;">
+                    ⚙️ Cambiar Contraseña (Acceso PRO Requerido)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-add-product" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-add-product')">&times;</span>
+            <h2 style="text-align:center;">Agregar Producto al Catálogo</h2>
+            
+            <div class="form-group">
+                <label>Nombre del Producto</label>
+                <input type="text" id="prod-name" placeholder="Ej: Camisa Slim Fit">
+            </div>
+            <div class="form-group">
+                <label>Descripción Corta</label>
+                <input type="text" id="prod-desc" placeholder="Ej: Talla M, Color Rojo">
+            </div>
+            <div class="form-group">
+                <label>Precio (Q)</label>
+                <input type="number" id="prod-price" placeholder="50">
+            </div>
+            
+            <div class="form-group">
+                <label>Imagen del Producto (Subir de galería)</label>
+                <input type="file" id="prod-file" accept="image/*" onchange="previewFile(this)">
+                <span id="file-name-display"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Número de WhatsApp del Vendedor (Ej: 502XXXXXXXX)</label>
+                <input type="text" id="prod-whatsapp" placeholder="Opcional: Si es diferente al principal">
+            </div>
+            
+            <div class="form-group">
+                <label>Categoría (Seleccione una existente o escriba una nueva)</label>
+                <select id="prod-cat-select" onchange="checkNewCategory(this.value)">
+                    <option value="" disabled selected>-- Seleccione un Catálogo --</option>
+                    <option value="Streaming">Streaming (Cine & TV)</option>
+                    <option value="Música">Música & Gaming</option>
+                    <option value="Software">Software & Antivirus</option>
+                    <option value="NUEVA_CAT">--- Escribir Nueva Categoría ---</option>
+                </select>
+                <input type="text" id="prod-cat-new" placeholder="Escriba la nueva categoría" style="margin-top: 10px; display: none;">
+            </div>
+            <button class="btn-add" onclick="saveProduct()">GUARDAR Y PUBLICAR</button>
+        </div>
+    </div>
+    
+    <div id="modal-change-pass" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-change-pass')">&times;</span>
+            <h2 style="text-align:center;">Cambiar Contraseña de Vendedor</h2>
+            
+            <div style="background: rgba(255, 51, 204, 0.1); border-left: 3px solid var(--primary); padding: 10px; margin-bottom: 20px; font-size: 0.9rem;">
+                <p style="margin: 0; color: var(--primary);">
+                    Estás en el panel de **CONFIGURACIÓN**. Aquí puedes cambiar la clave de VENTA.
+                </p>
+            </div>
+            
+            <div class="form-group">
+                <label>Contraseña Actual (Configuración PRO - Clave Maestra)</label>
+                <input type="password" id="current-pro-pass-input" placeholder="Ingresa clave PRO para confirmar">
+            </div>
+            <div class="form-group">
+                <label>NUEVA Contraseña de VENTA</label>
+                <input type="password" id="new-venta-pass-input" placeholder="Escribe la nueva clave de Venta">
+            </div>
+            <div class="form-group">
+                <label>Repetir NUEVA Contraseña de VENTA</label>
+                <input type="password" id="confirm-new-venta-pass-input" placeholder="Confirma la nueva clave de Venta">
+            </div>
+            <button class="btn-add" onclick="changeAdminPassword()">CONFIRMAR CAMBIO DE CLAVE DE VENTA</button>
+        </div>
+    </div>
+
+    <div id="modal-terms" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-terms')">&times;</span>
+            <h2>Términos y Condiciones</h2>
+            <p>Al comprar en PAUDRONIX GT aceptas lo siguiente:</p>
+            <ul>
+                <li>Las cuentas son para uso personal.</li>
+                <li>No se permite cambiar el correo ni la contraseña de las cuentas compartidas.</li>
+                <li>La entrega se realiza vía WhatsApp tras confirmar el pago.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="modal-privacy" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-privacy')">&times;</span>
+            <h2>Política de Privacidad</h2>
+            <p>En PAUDRONIX GT respetamos tus datos:</p>
+            <ul>
+                <li>Tu número de teléfono solo se usa para entregar el producto.</li>
+                <li>No compartimos tu información con terceros.</li>
+                <li>Tus datos de pago son manejados directamente por tu banco (transferencia).</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="modal-garantia" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-garantia')">&times;</span>
+            <h2>Política de Garantía</h2>
+            <p>Tu compra está protegida:</p>
+            <ul>
+                <li>Garantía completa durante la duración contratada (ej. 30 días).</li>
+                <li>Si la cuenta falla, se repone en menos de 24 horas.</li>
+                <li>No hay reembolsos si el cliente cambia la contraseña de la cuenta (anula garantía).</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="modal-product-management" class="modal">
+        <div class="modal-content" style="max-width: 850px;">
+            <span class="close-btn" onclick="closeModal('modal-product-management')">&times;</span>
+            <h2 style="text-align:center;">🔒 Gestión de Productos (Acceso PRO)</h2>
+            
+            <div class="admin-instructions">
+                <h4><span style="font-size: 1.5rem;">🚨</span> Gestión de Stock y Eliminación</h4>
+                <p>Muestra **todos** los productos para que puedas **Eliminar** o cambiar el **Estado de Stock**. Solo accesible con clave PRO.</p>
+            </div>
+            
+            <div style="max-height: 400px; overflow-y: auto;">
+                <table class="management-table">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Stock</th>
+                            <th>Eliminar/Stock</th>
+                        </tr>
+                    </thead>
+                    <tbody id="product-management-list">
+                        <tr><td colspan="3" style="text-align:center; color: #aaa;">Cargando productos desde la base de datos...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div style="background: rgba(255, 255, 255, 0.05); padding: 15px; margin-top: 20px; border-radius: 8px;">
+                 <p style="margin: 0; color: #fff;">
+                    **Opciones PRO Adicionales:**
+                    <button class="admin-btn btn-yellow" style="width: auto; padding: 8px 15px; margin-top: 10px; display: inline-block;" onclick="closeModal('modal-product-management'); openModal('modal-change-pass')">
+                        Ir a Cambiar Contraseña de Venta
+                    </button>
+                 </p>
+            </div>
+        </div>
+    </div>
+    <a href="https://wa.me/50237871216" class="wa-float" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA" style="width: 35px;">
+    </a>
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+        import { getFirestore, collection, getDocs, addDoc, doc, updateDoc, deleteDoc, setLogLevel } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+        // =========================================================================================================
+        // 🚨 ¡ATENCIÓN! REEMPLAZA ESTO CON TUS CREDENCIALES REALES DE FIREBASE
+        // (Copiar y pegar de la Configuración de tu proyecto en Firebase)
+        // =========================================================================================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyCAdAiuPWKUXb6dJ0yWylG3X2bqTD111a4", // <- REEMPLAZAR
+            authDomain: "paudronix-97d80.firebaseapp.com", // <- REEMPLAZAR
+            projectId: "paudronix-97d80", // <- REEMPLAZAR
+            storageBucket: "paudronix-97d80.firebasestorage.app", // <- REEMPLAZAR
+            messagingSenderId: "992392091778", // <- REEMPLAZAR
+            appId: "1:992392091778:web:bc00edc41ce1644ea73c9b", // <- REEMPLAZAR
+            measurementId: "G-D0KZH6KZPP" // <- REEMPLAZAR
+        };
+        // =========================================================================================================
+
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+        setLogLevel('debug'); 
+        
+        const PRODUCTS_COLLECTION = "products_paudronix_gt"; 
+        
+        // --- FUNCIONES DE PUENTE GLOBALES PARA GUARDAR Y CARGAR DATOS ---
+        window.saveProductToDatabase = async (newProductData) => {
+            if (!db) { return alert("ERROR: La base de datos no está conectada."); }
+            try {
+                const docRef = await addDoc(collection(db, PRODUCTS_COLLECTION), newProductData);
+                document.dispatchEvent(new CustomEvent('product-saved', { 
+                    detail: { ...newProductData, id: docRef.id, isStatic: false } 
+                }));
+            } catch (e) {
+                console.error("Error añadiendo documento a Firebase: ", e);
+                alert("❌ ERROR AL GUARDAR. Verifica las Reglas de Seguridad (deben ser 'allow write: if true;').");
+            }
+        };
+
+        window.loadProductsAndRender = async () => {
+            if (!db) { 
+                document.dispatchEvent(new CustomEvent('products-loaded', { detail: [] })); 
+                return; 
+            }
+            try {
+                const querySnapshot = await getDocs(collection(db, PRODUCTS_COLLECTION));
+                const dynamicProducts = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id, isStatic: false }));
+                document.dispatchEvent(new CustomEvent('products-loaded', { detail: dynamicProducts }));
+            } catch (e) {
+                console.error("Error cargando productos desde Firebase: ", e);
+                document.dispatchEvent(new CustomEvent('products-loaded', { detail: [] }));
+            }
+        };
+        
+        window.deleteProductFromDatabase = async (productId) => {
+            if (!db) return alert("Error: Base de datos no conectada.");
+            try {
+                await deleteDoc(doc(db, PRODUCTS_COLLECTION, productId));
+                document.dispatchEvent(new CustomEvent('product-deleted', { detail: { id: productId } }));
+                alert("✅ Producto eliminado permanentemente de la base de datos en línea.");
+            } catch (e) {
+                console.error("Error eliminando documento de Firebase: ", e);
+                alert("❌ Error al eliminar el producto de la base de datos.");
+            }
+        }
+
+        window.updateStockInDatabase = async (productId, newStockValue) => {
+             if (!db) return alert("Error: Base de datos no conectada.");
+             try {
+                const productDocRef = doc(db, PRODUCTS_COLLECTION, productId);
+                await updateDoc(productDocRef, { stock: newStockValue });
+                document.dispatchEvent(new CustomEvent('stock-updated', { detail: { id: productId, stock: newStockValue } }));
+                alert(`✅ Stock actualizado a: ${newStockValue === 1 ? 'EN STOCK' : 'SIN STOCK'}`);
+
+            } catch (e) {
+                console.error("Error actualizando stock en Firebase: ", e);
+                alert("❌ Error al actualizar el stock.");
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            window.loadProductsAndRender();
+        });
+    </script>
+    <script>
+        // TU NUMERO DE WHATSAPP GENERAL (DEFAULT)
+        const myPhone = "50237871216";
+        
+        // ----------------------------------------------------
+        // --- CONTRASEÑAS POR DEFECTO ---
+        // ----------------------------------------------------
+        // Contraseñas iniciales/de fábrica (¡Estas son las que solicitaste!)
+        const defaultVentaPassword = "paudronixGt@#1)"; 
+        const defaultProPassword = "paudrinixProGt2200@%"; 
+        let imageBase64 = null; 
+        
+        // ----------------------------------------------------
+        // --- PRODUCTOS FIJOS (ESTÁTICOS EN EL HTML) ---
+        // ----------------------------------------------------
+        const initialProducts = [
+            // isStatic: true indica que el producto está cableado en el HTML y no en la base de datos
+            { id: 'static1', name: "Netflix Premium", desc: "1 Perfil Privado", price: "15.00", img: "https://upload.wikimedia.org/wikipedia/commons/7/75/Netflix_icon.svg", cat: "Streaming", gridId: "grid-streaming", whatsapp: myPhone, stock: 1, isStatic: true },
+            { id: 'static2', name: "Disney+ Standard", desc: "Calidad 4K", price: "15.00", img: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg", cat: "Streaming", gridId: "grid-streaming", whatsapp: myPhone, stock: 1, isStatic: true },
+            { id: 'static3', name: "HBO Max", desc: "3 Pantallas", price: "15.00", img: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Max_logo.svg", cat: "Streaming", gridId: "grid-streaming", whatsapp: myPhone, stock: 1, isStatic: true },
+            { id: 'static4', name: "Prime Video", desc: "Envíos + TV", price: "15.00", img: "https://upload.wikimedia.org/wikipedia/commons/1/11/Amazon_Prime_Video_logo.svg", cat: "Streaming", gridId: "grid-streaming", whatsapp: myPhone, stock: 1, isStatic: true },
+            
+            { id: 'static5', name: "Spotify Premium", desc: "Individual 1 Mes", price: "20.00", img: "https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg", cat: "Música", gridId: "grid-musica", whatsapp: myPhone, stock: 1, isStatic: true },
+            { id: 'static6', name: "YouTube Premium", desc: "Sin Anuncios", price: "18.00", img: "https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg", cat: "Música", gridId: "grid-musica", whatsapp: myPhone, stock: 1, isStatic: true },
+            { id: 'static7', name: "Game Pass Ult.", desc: "PC + Consola", price: "50.00", img: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Xbox_Game_Pass_logo.svg", cat: "Música", gridId: "grid-musica", whatsapp: myPhone, stock: 1, isStatic: true },
+            { id: 'static8', name: "Tarj. Steam", desc: "Q.100.00 (Guatemala)", price: "100.00", img: "https://upload.wikimedia.org/wikipedia/commons/a/ae/Steam_logo.svg", cat: "Música", gridId: "grid-musica", whatsapp: myPhone, stock: 1, isStatic: true },
+            
+            { id: 'static9', name: "Office 365", desc: "1PC / 1 Año", price: "75.00", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Microsoft_Office_logo_%282019%2C_stacked%29.svg/1024px-Microsoft_Office_logo_%282019%2C_stacked%29.svg.png", cat: "Software", gridId: "grid-software", whatsapp: myPhone, stock: 1, isStatic: true },
+            { id: 'static10', name: "Windows 11 Pro", desc: "Licencia Retail", price: "125.00", img: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Windows_logo_-_2012.svg", cat: "Software", gridId: "grid-software", whatsapp: myPhone, stock: 1, isStatic: true },
+        ];
+        
+        const categoryToGridId = {
+            'Streaming': 'grid-streaming',
+            'Música': 'grid-musica',
+            'Software': 'grid-software',
+        };
+        
+        let allProductsInApp = [];
+
+        // ----------------------------------------------------
+        // --- FUNCIONES DE ADMINISTRACIÓN Y MODALES (CORE) ---
+        // ----------------------------------------------------
+        
+        function getCurrentVentaPassword() {
+            return localStorage.getItem('paudronix_venta_pass') || defaultVentaPassword;
+        }
+
+        function getProPassword() {
+            return localStorage.getItem('paudronix_pro_pass') || defaultProPassword;
+        }
+
+        function checkNewCategory(selectedValue) {
+            const newCatInput = document.getElementById('prod-cat-new');
+            if (selectedValue === 'NUEVA_CAT') {
+                newCatInput.style.display = 'block';
+                newCatInput.focus();
+            } else {
+                newCatInput.style.display = 'none';
+                newCatInput.value = ''; 
+            }
+        }
+
+        // 1. CARGAR ELEMENTOS AL INICIAR
+        document.addEventListener('DOMContentLoaded', () => {
+            allProductsInApp = [...initialProducts];
+            // La carga de Firebase se inicia automáticamente en el bloque module.
+        });
+
+        // ----------------------------------------------------
+        // --- MANEJO DE EVENTOS DE FIREBASE DESDE EL MÓDULO ---
+        // ----------------------------------------------------
+
+        // Pasa la lista de productos al script principal (ejecutado después de loadProductsAndRender)
+        document.addEventListener('products-loaded', (e) => {
+            const dynamicProducts = e.detail;
+            
+            // Combina estáticos y dinámicos, evitando duplicados
+            allProductsInApp = [
+                ...initialProducts.filter(p => !dynamicProducts.some(dp => dp.name === p.name)), 
+                ...dynamicProducts 
+            ];
+            renderAllProducts();
+        });
+
+        // Maneja el producto guardado
+        document.addEventListener('product-saved', (e) => {
+            const savedProduct = e.detail;
+            allProductsInApp.push(savedProduct); // Agregar producto
+            renderAllProducts();
+            
+            // LIMPIAR Y CERRAR EL MODAL
+            closeModal('modal-add-product');
+            
+            alert("✅ Producto publicado en línea al instante y persistencia garantizada.");
+            
+            // Limpiar formulario y variables
+            document.getElementById('prod-name').value = '';
+            document.getElementById('prod-price').value = '';
+            document.getElementById('prod-desc').value = '';
+            document.getElementById('prod-whatsapp').value = '';
+            document.getElementById('prod-cat-select').value = ''; 
+            document.getElementById('prod-cat-new').value = ''; 
+            document.getElementById('prod-cat-new').style.display = 'none'; 
+            document.getElementById('prod-file').value = '';
+            document.getElementById('file-name-display').textContent = '';
+            imageBase64 = null;
+        });
+
+        // Maneja el producto eliminado
+        document.addEventListener('product-deleted', (e) => {
+            allProductsInApp = allProductsInApp.filter(p => p.id !== e.detail.id);
+            renderAllProducts();
+            populateManagementList(); 
+        });
+
+        // Maneja el stock actualizado
+        document.addEventListener('stock-updated', (e) => {
+            const productIndex = allProductsInApp.findIndex(p => p.id === e.detail.id);
+            if (productIndex > -1) {
+                allProductsInApp[productIndex].stock = e.detail.stock;
+            }
+            renderAllProducts();
+            populateManagementList(); 
+        });
+        
+        // Funciones vacías (la lógica está en el bloque module)
+        async function loadProductsFromFirebase() {}
+        async function saveProductToFirebase(newProductData) {}
+        
+        // Las funciones PRO llaman al puente global
+        async function deleteProductFromFirebase(productId) {
+            window.deleteProductFromDatabase(productId);
+        }
+        
+        async function updateStockInFirebase(productId, newStockValue) {
+            window.updateStockInDatabase(productId, newStockValue);
+        }
+
+        // ----------------------------------------------------
+        // --- LÓGICA DE GESTIÓN DE PRODUCTOS ---
+        // ----------------------------------------------------
+        
+        function saveProduct() {
+            const name = document.getElementById('prod-name').value;
+            const desc = document.getElementById('prod-desc').value;
+            const price = document.getElementById('prod-price').value;
+            const whatsapp = document.getElementById('prod-whatsapp').value;
+            
+            const catSelect = document.getElementById('prod-cat-select').value;
+            const catNew = document.getElementById('prod-cat-new').value.trim();
+            
+            let finalCatText;
+            if (catSelect === 'NUEVA_CAT' && catNew) {
+                finalCatText = catNew; 
+            } else if (catSelect && catSelect !== 'NUEVA_CAT') {
+                finalCatText = catSelect; 
+            } else {
+                 alert("Nombre, Precio y **Categoría** obligatorios"); 
+                 return;
+            }
+
+            if(!name || !price) { alert("Nombre, Precio y Categoría obligatorios"); return; }
+            
+            const defaultImage = 'https://cdn-icons-png.flaticon.com/512/3050/3050075.png'; 
+            const finalImage = imageBase64 || defaultImage; 
+            
+            const finalWhatsapp = whatsapp || myPhone; 
+            const targetGridId = categoryToGridId[finalCatText] || 'grid-software';
+
+            const newProductData = {
+                name: name,
+                desc: desc,
+                price: price,
+                img: finalImage,
+                whatsapp: finalWhatsapp, 
+                cat: finalCatText, 
+                gridId: targetGridId, 
+                stock: 1 
+            };
+            
+            // ** LLAMADA AL PUENTE DE FIREBASE PARA GUARDAR **
+            window.saveProductToDatabase(newProductData);
+
+            alert("📢 Enviando producto a la base de datos... Por favor, espere la confirmación.");
+        }
+
+        function renderAllProducts() {
+             // Limpia los grids de los productos agregados dinámicamente
+            const grids = ['grid-streaming', 'grid-musica', 'grid-software'];
+            grids.forEach(gridId => {
+                const grid = document.getElementById(gridId);
+                 // Removemos solo los productos dinámicos (los que no tienen ID estático)
+                Array.from(grid.children).forEach(child => {
+                    if (child.id && child.id.startsWith('card-')) {
+                         const id = child.id.substring(5);
+                         if (!id.startsWith('static')) { // Si no es un ID estático, es dinámico y lo borramos antes de repintar
+                            child.remove();
+                         }
+                    }
+                });
+            });
+            
+            // 1. Renderizar productos dinámicos obtenidos de Firebase
+            const dynamicProducts = allProductsInApp.filter(p => !p.isStatic);
+            dynamicProducts.forEach(product => {
+                renderProductCard(product);
+            });
+
+            // 2. Actualizar stock para todos los productos
+            updateProductsVisibility(allProductsInApp);
+        }
+        
+
+        function updateProductsVisibility(productsList) {
+            const stockMap = productsList
+                .reduce((map, p) => {
+                    const key = p.isStatic ? p.name : `card-${p.id}`; 
+                    map[key] = p.stock;
+                    return map;
+                }, {});
+
+            const allCards = document.querySelectorAll('.card.glass');
+            allCards.forEach(card => {
+                const h3 = card.querySelector('h3');
+                const buyButton = card.querySelector('.btn-buy');
+                
+                let key;
+                if (card.id && card.id.startsWith('card-')) {
+                    key = card.id; 
+                } else if (h3) {
+                    key = h3.textContent.trim(); 
+                }
+
+                const currentStock = stockMap[key];
+                
+                if (currentStock !== undefined) {
+                    if (currentStock === 0) {
+                        if (buyButton) {
+                            buyButton.style.background = '#333';
+                            buyButton.style.cursor = 'default';
+                            buyButton.textContent = 'AGOTADO 😭';
+                            buyButton.href = '#';
+                            buyButton.onclick = (e) => { e.preventDefault(); };
+                        }
+                    } else if (currentStock === 1 && buyButton) {
+                         if (buyButton.textContent === 'AGOTADO 😭') {
+                            const product = productsList.find(p => (p.isStatic && p.name === key) || (`card-${p.id}` === key));
+                            
+                            buyButton.style.background = 'var(--ref-green)'; /* Usa el color verde de referencia */
+                            buyButton.style.cursor = 'pointer';
+                            buyButton.textContent = 'PEDIR'; /* Texto ajustado a la referencia */
+                            
+                            if (product) {
+                                const msg = `Hola Paudronix, me interesa: ${product.name} - Q.${product.price}`;
+                                buyButton.href = `https://wa.me/${product.whatsapp}?text=${encodeURIComponent(msg)}`;
+                            }
+                            buyButton.onclick = null;
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderProductCard(product) {
+            const targetContainer = document.getElementById(product.gridId) || document.getElementById('grid-software');
+
+            const isOutOfStock = product.stock === 0;
+
+            const phone = product.whatsapp || myPhone; 
+            const msg = `Hola Paudronix, me interesa: ${product.name} - Q.${product.price}`;
+            const link = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+
+            const card = document.createElement('div');
+            card.className = 'card glass';
+            card.id = `card-${product.id}`;
+            
+            const deleteId = product.id; 
+            
+            card.innerHTML = `
+                <div class="discount-badge">-??%</div> <img src="${product.img}" class="product-img-custom" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <p style="color:#555; font-size:0.9rem">${product.desc}</p>
+                <div class="price">Q.${product.price}.00</div>
+                ${isOutOfStock ? 
+                    `<div class="btn-buy" style="background: #333; cursor: default;">AGOTADO 😭</div>` : 
+                    `<a href="${link}" class="btn-buy" target="_blank" style="background: var(--ref-green);">PEDIR</a>`
+                }
+                <button onclick="deleteProductPRO('${deleteId}')" class="btn-delete">Eliminar</button>
+            `;
+            targetContainer.appendChild(card);
+        }
+
+        // ----------------------------------------------------
+        // --- FUNCIONES DE GESTIÓN PRO (USA FIREBASE) ---
+        // ----------------------------------------------------
+
+        function deleteProductPRO(id) {
+            const product = allProductsInApp.find(p => p.id === id);
+
+            if(product && product.isStatic) {
+                alert("Este es un producto estático (hardcodeado) y no se puede eliminar de la base de datos. Solo productos subidos online pueden borrarse.");
+                return;
+            }
+            if(confirm("🚨 ¡CONFIRMAR ELIMINACIÓN PERMANENTE! ¿Estás seguro de borrar este producto de la base de datos en línea?")) {
+                deleteProductFromFirebase(id);
+            }
+        }
+        
+        function setProductStock(id, newStockValue) {
+            const product = allProductsInApp.find(p => p.id === id);
+
+             if(product && product.isStatic) {
+                alert("Este es un producto estático (hardcodeado) y no se puede modificar su stock en la base de datos. Solo se puede hacer con productos subidos online.");
+                return;
+            }
+            updateStockInFirebase(id, newStockValue);
+        }
+        
+        function populateManagementList() {
+            const list = document.getElementById('product-management-list');
+            list.innerHTML = ''; 
+
+            if (allProductsInApp.length === 0) {
+                list.innerHTML = '<tr><td colspan="3" style="text-align:center; color: #ccc;">No hay productos cargados en la base de datos.</td></tr>';
+                return;
+            }
+
+            allProductsInApp.forEach(product => {
+                const row = document.createElement('tr');
+                
+                const isStatic = product.isStatic;
+                
+                const buttons = isStatic 
+                    ? `<span style="color: #666; font-size: 0.8rem;">Modif. solo en código</span>`
+                    : `
+                        <button onclick="deleteProductPRO('${product.id}')" style="background: red; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; width: 100%;">
+                            ❌ ELIMINAR
+                        </button>
+                        <button onclick="setProductStock('${product.id}', ${product.stock === 1 ? 0 : 1})" 
+                            style="background: ${product.stock === 1 ? 'orange' : '#25D366'}; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 5px;">
+                            ${product.stock === 1 ? 'Sin Stock' : 'Reponer Stock'}
+                        </button>
+                    `;
+                
+                const stockStatus = product.stock === 1 ? '<span style="color: #25D366; font-weight: bold;">EN STOCK</span>' : '<span style="color: red; font-weight: bold;">SIN STOCK</span>';
+                
+                row.innerHTML = `
+                    <td style="color: #fff; max-width: 250px;">${product.name} <br> <span style="font-size: 0.75rem; color:#aaa;">(${product.cat}) ${isStatic ? '(Estat.)' : '(Online)'}</span></td>
+                    <td style="min-width: 100px;">${stockStatus}</td>
+                    <td style="width: 200px;">
+                        ${buttons}
+                    </td>
+                `;
+                list.appendChild(row);
+            });
+        }
+        
+        // --- FUNCIONES DE ADMINISTRACIÓN Y MODALES ---
+        
+        function checkAdminAccess(accessType) {
+            
+            let currentPass;
+            let enteredPass;
+            
+            if (accessType === 'VENDER') {
+                currentPass = getCurrentVentaPassword();
+                enteredPass = document.getElementById('venta-pass-input').value;
+            } else if (accessType === 'CONFIG') {
+                currentPass = getProPassword();
+                enteredPass = document.getElementById('pro-pass-input').value;
+            } else {
+                return; 
+            }
+
+            if (enteredPass === currentPass) {
+                document.getElementById('venta-pass-input').value = '';
+                document.getElementById('pro-pass-input').value = '';
+                document.getElementById('access-error-message').style.display = 'none';
+                closeModal('modal-access-menu'); 
+                
+                if (accessType === 'VENDER') {
+                    openModal('modal-admin-menu');
+                } else if (accessType === 'CONFIG') {
+                    populateManagementList(); 
+                    openModal('modal-product-management');
+                }
+            } else {
+                showAccessError();
+            }
+        }
+        
+        function showAccessError() {
+            const errorElement = document.getElementById('access-error-message');
+            errorElement.style.display = 'block';
+            setTimeout(() => { errorElement.style.display = 'none'; }, 3000);
+        }
+        
+        function changeAdminPassword() {
+            const currentProPass = getProPassword();
+            const enteredCurrentProPass = document.getElementById('current-pro-pass-input').value;
+            const newVentaPass = document.getElementById('new-venta-pass-input').value;
+            const confirmNewVentaPass = document.getElementById('confirm-new-venta-pass-input').value;
+
+            if (enteredCurrentProPass !== currentProPass) {
+                alert("❌ La Contraseña de CONFIGURACIÓN (Clave Maestra) es incorrecta.");
+                return;
+            }
+            if (newVentaPass.length < 5) {
+                alert("⚠️ La nueva contraseña de VENTA debe tener al menos 5 caracteres.");
+                return;
+            }
+            if (newVentaPass !== confirmNewVentaPass) {
+                alert("⚠️ La Nueva Contraseña de VENTA y la Confirmación no coinciden.");
+                return;
+            }
+
+            localStorage.setItem('paudronix_venta_pass', newVentaPass);
+            
+            document.getElementById('current-pro-pass-input').value = '';
+            document.getElementById('new-venta-pass-input').value = '';
+            document.getElementById('confirm-new-venta-pass-input').value = '';
+
+            alert("✅ ¡Contraseña de VENTA cambiada con éxito! La nueva clave es: " + newVentaPass);
+            
+            closeModal('modal-change-pass');
+        }
+        
+        function previewFile(input) {
+            const file = input.files[0];
+            const reader = new FileReader();
+
+            if (file) {
+                reader.readAsDataURL(file);
+                reader.onloadend = function () {
+                    imageBase64 = reader.result; 
+                    document.getElementById('file-name-display').textContent = '✅ Archivo cargado: ' + file.name;
+                }
+            } else {
+                imageBase64 = null;
+                document.getElementById('file-name-display').textContent = '';
+            }
+        }
+        
+        function openModal(modalId) { document.getElementById(modalId).style.display = "flex"; }
+        function closeModal(modalId) { 
+            if (modalId === 'modal-access-menu') {
+                document.getElementById('venta-pass-input').value = '';
+                document.getElementById('pro-pass-input').value = '';
+                document.getElementById('access-error-message').style.display = 'none';
+            }
+            if (modalId === 'modal-change-pass') {
+                 document.getElementById('current-pro-pass-input').value = '';
+                 document.getElementById('new-venta-pass-input').value = '';
+                 document.getElementById('confirm-new-venta-pass-input').value = '';
+            }
+            if (modalId === 'modal-add-product') {
+                document.getElementById('prod-file').value = '';
+                document.getElementById('file-name-display').textContent = '';
+                imageBase64 = null;
+                document.getElementById('prod-cat-select').value = ''; 
+                document.getElementById('prod-cat-new').value = ''; 
+                document.getElementById('prod-cat-new').style.display = 'none';
+            }
+            document.getElementById(modalId).style.display = "none"; 
+        }
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                closeModal(event.target.id);
+            }
+        }
+    </script>
+    </body>
+</html>
